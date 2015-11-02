@@ -21,6 +21,7 @@
 #ifndef PlainFFT_h /* Prevent loading library twice */
 #define PlainFFT_h
 
+#include "arduino.h" /* This is where the standard Arduino code lies */
 
 #define FFT_LIB_REV 0x02
 /* Custom constants */
