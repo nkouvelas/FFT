@@ -21,7 +21,7 @@
 #ifndef PlainFFT_h /* Prevent loading library twice */
 #define PlainFFT_h
 #include "application.h"
-
+#include <math.h>
 
 #define FFT_LIB_REV 0x02
 /* Custom constants */
