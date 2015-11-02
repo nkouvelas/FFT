@@ -21,7 +21,18 @@
 #ifndef PlainFFT_h /* Prevent loading library twice */
 #define PlainFFT_h
 
-#include "arduino.h" /* This is where the standard Arduino code lies */
+#ifdef ARDUINO
+  #if (ARDUINO >= 100)
+   #include <Arduino.h>
+  #else
+   #include <WProgram.h>
+   #include <pins_arduino.h>
+  #endif
+#elif USE_SPARK_CORE_V02
+  #include <spark_related_stuff_v2.h>
+#elif USE_SPARK_CORE_V01
+  #include <spark_related_stuff_v1.h>
+#endif
 
 #define FFT_LIB_REV 0x02
 /* Custom constants */
