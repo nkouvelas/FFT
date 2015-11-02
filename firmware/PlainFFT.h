@@ -20,7 +20,7 @@
 
 #ifndef PlainFFT_h /* Prevent loading library twice */
 #define PlainFFT_h
-
+#include "application.h"
 
 
 #define FFT_LIB_REV 0x02
