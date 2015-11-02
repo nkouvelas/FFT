@@ -1,4 +1,4 @@
-#include "plainFFT/plainFFT.h"
+#include "PlainFFT/PlainFFT.h"
 
 // TODO write code that illustrates the best parts of what your library can do
 
