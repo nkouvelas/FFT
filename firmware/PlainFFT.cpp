@@ -97,7 +97,7 @@ void PlainFFT::ComplexToMagnitude(double *vReal, double *vImag, uint16_t samples
 {
 /* vM is half the size of vReal and vImag */
 	for (uint8_t i = 0; i < samples; i++) {
-		vReal[i] = sqrt(sq(vReal[i]) + sq(vImag[i]));
+		vReal[i] = sqrt(sqrt(vReal[i]) + sqrt(vImag[i]));
 	}
 }
 
@@ -131,7 +131,7 @@ void PlainFFT::Windowing(double *vData, uint16_t samples, uint8_t windowType, ui
 			weighingFactor = 0.2810639 - (0.5208972 * cos(twoPi * ratio)) + (0.1980399 * cos(fourPi * ratio));
 			break;
 		case FFT_WIN_TYP_WELCH: /* welch */
-			weighingFactor = 1.0 - sq((indexMinusOne - samplesMinusOne / 2.0) / (samplesMinusOne / 2.0));
+			weighingFactor = 1.0 - sqrt((indexMinusOne - samplesMinusOne / 2.0) / (samplesMinusOne / 2.0));
 			break;
 		}
 		if (dir == FFT_FORWARD) {
