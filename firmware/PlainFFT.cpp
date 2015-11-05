@@ -38,7 +38,7 @@ uint8_t PlainFFT::Revision(void)
 	return(FFT_LIB_REV);
 }
 
-void PlainFFT::Compute(double *vReal, double *vImag, uint16_t samples, uint8_t dir) 
+void PlainFFT::Compute(int *vReal, int *vImag, uint16_t samples, uint8_t dir) 
 {
 /* Computes in-place complex-to-complex FFT */
 	/* Reverse bits */
@@ -56,25 +56,25 @@ void PlainFFT::Compute(double *vReal, double *vImag, uint16_t samples, uint8_t d
 		j += k;
 	}
 	/* Compute the FFT  */
-	double c1 = -1.0; 
-	double c2 = 0.0;
+	int c1 = -1.0; 
+	int c2 = 0.0;
 	uint8_t l2 = 1;
 	for (uint8_t l = 0; (l < Exponent(samples)); l++) {
 		uint8_t l1 = l2;
 		l2 <<= 1;
-		double u1 = 1.0; 
-		double u2 = 0.0;
+		int u1 = 1.0; 
+		int u2 = 0.0;
 		for (j = 0; j < l1; j++) {
 			 for (uint16_t i = j; i < samples; i += l2) {
 					uint16_t i1 = i + l1;
-					double t1 = u1 * vReal[i1] - u2 * vImag[i1];
-					double t2 = u1 * vImag[i1] + u2 * vReal[i1];
+					int t1 = u1 * vReal[i1] - u2 * vImag[i1];
+					int t2 = u1 * vImag[i1] + u2 * vReal[i1];
 					vReal[i1] = vReal[i] - t1; 
 					vImag[i1] = vImag[i] - t2;
 					vReal[i] += t1;
 					vImag[i] += t2;
 			 }
-			 double z = ((u1 * c1) - (u2 * c2));
+			 int z = ((u1 * c1) - (u2 * c2));
 			 u2 = ((u1 * c2) + (u2 * c1));
 			 u1 = z;
 		}
@@ -93,7 +93,7 @@ void PlainFFT::Compute(double *vReal, double *vImag, uint16_t samples, uint8_t d
 	}
 }
 
-void PlainFFT::ComplexToMagnitude(double *vReal, double *vImag, uint16_t samples) 
+void PlainFFT::ComplexToMagnitude(int *vReal, int *vImag, uint16_t samples) 
 {
 /* vM is half the size of vReal and vImag */
 	for (uint8_t i = 0; i < samples; i++) {
@@ -101,7 +101,7 @@ void PlainFFT::ComplexToMagnitude(double *vReal, double *vImag, uint16_t samples
 	}
 }
 
-void PlainFFT::Windowing(double *vData, uint16_t samples, uint8_t windowType, uint8_t dir) 
+void PlainFFT::Windowing(int *vData, uint16_t samples, uint8_t windowType, uint8_t dir) 
 {
 /* Weighing factors are computed once before multiple use of FFT */
 /* The weighing function is symetric; half the weighs are recorded */
@@ -109,7 +109,7 @@ void PlainFFT::Windowing(double *vData, uint16_t samples, uint8_t windowType, ui
 	for (uint16_t i = 0; i < (samples >> 1); i++) {
 		double indexMinusOne = double(i);
 		double ratio = (indexMinusOne / samplesMinusOne);
-		double weighingFactor = 1.0;
+		int weighingFactor = 1.0;
 		/* Compute and record weighting factor */
 		switch (windowType) {
 		case FFT_WIN_TYP_RECTANGLE: /* rectangle (box car) */
@@ -145,29 +145,29 @@ void PlainFFT::Windowing(double *vData, uint16_t samples, uint8_t windowType, ui
 	}
 }
 
-double PlainFFT::MajorPeak(double *vD, uint16_t samples, double samplingFrequency) 
-{
-	double maxY = 0;
-	uint16_t IndexOfMaxY = 0;
-	for (uint16_t i = 1; i < ((samples >> 1) - 1); i++) {
-		if ((vD[i-1] < vD[i]) && (vD[i] > vD[i+1])) {
-			if (vD[i] > maxY) {
-				maxY = vD[i];
-				IndexOfMaxY = i;
-			}
-		}
-	}
-	double delta = 0.5 * ((vD[IndexOfMaxY-1] - vD[IndexOfMaxY+1]) / (vD[IndexOfMaxY-1] - (2.0 * vD[IndexOfMaxY]) + vD[IndexOfMaxY+1]));
-	double interpolatedX = ((IndexOfMaxY + delta)  * samplingFrequency) / (samples-1);
+//double PlainFFT::MajorPeak(double *vD, uint16_t samples, double samplingFrequency) 
+//{
+	//double maxY = 0;
+	//uint16_t IndexOfMaxY = 0;
+	//for (uint16_t i = 1; i < ((samples >> 1) - 1); i++) {
+		//if ((vD[i-1] < vD[i]) && (vD[i] > vD[i+1])) {
+			//if (vD[i] > maxY) {
+				//maxY = vD[i];
+				//IndexOfMaxY = i;
+			//}
+		//}
+	//}
+	//double delta = 0.5 * ((vD[IndexOfMaxY-1] - vD[IndexOfMaxY+1]) / (vD[IndexOfMaxY-1] - (2.0 * vD[IndexOfMaxY]) + vD[IndexOfMaxY+1]));
+	//double interpolatedX = ((IndexOfMaxY + delta)  * samplingFrequency) / (samples-1);
 	/* retuned value: interpolated frequency peak apex */
-	return(interpolatedX);
-}
+	//return(interpolatedX);
+//}
 
 /* Private functions */
 
-void PlainFFT::Swap(double *x, double *y) 
+void PlainFFT::Swap(int *x, int *y) 
 {
-	double temp = *x;
+	int temp = *x;
 	*x = *y;
 	*y = temp;
 }
