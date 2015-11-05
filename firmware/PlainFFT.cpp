@@ -56,25 +56,25 @@ void PlainFFT::Compute(int *vReal, int *vImag, uint16_t samples, uint8_t dir)
 		j += k;
 	}
 	/* Compute the FFT  */
-	int c1 = -1.0; 
-	int c2 = 0.0;
+	double c1 = -1.0; 
+	double c2 = 0.0;
 	uint8_t l2 = 1;
 	for (uint8_t l = 0; (l < Exponent(samples)); l++) {
 		uint8_t l1 = l2;
 		l2 <<= 1;
-		int u1 = 1.0; 
-		int u2 = 0.0;
+		double u1 = 1.0; 
+		double u2 = 0.0;
 		for (j = 0; j < l1; j++) {
 			 for (uint16_t i = j; i < samples; i += l2) {
 					uint16_t i1 = i + l1;
-					int t1 = u1 * vReal[i1] - u2 * vImag[i1];
-					int t2 = u1 * vImag[i1] + u2 * vReal[i1];
+					double t1 = u1 * vReal[i1] - u2 * vImag[i1];
+					double t2 = u1 * vImag[i1] + u2 * vReal[i1];
 					vReal[i1] = vReal[i] - t1; 
 					vImag[i1] = vImag[i] - t2;
 					vReal[i] += t1;
 					vImag[i] += t2;
 			 }
-			 int z = ((u1 * c1) - (u2 * c2));
+			 double z = ((u1 * c1) - (u2 * c2));
 			 u2 = ((u1 * c2) + (u2 * c1));
 			 u1 = z;
 		}
@@ -109,7 +109,7 @@ void PlainFFT::Windowing(int *vData, uint16_t samples, uint8_t windowType, uint8
 	for (uint16_t i = 0; i < (samples >> 1); i++) {
 		double indexMinusOne = double(i);
 		double ratio = (indexMinusOne / samplesMinusOne);
-		int weighingFactor = 1.0;
+		double weighingFactor = 1.0;
 		/* Compute and record weighting factor */
 		switch (windowType) {
 		case FFT_WIN_TYP_RECTANGLE: /* rectangle (box car) */
@@ -167,7 +167,7 @@ void PlainFFT::Windowing(int *vData, uint16_t samples, uint8_t windowType, uint8
 
 void PlainFFT::Swap(int *x, int *y) 
 {
-	static int temp = *x;
+	double temp = *x;
 	*x = *y;
 	*y = temp;
 }
