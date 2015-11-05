@@ -167,7 +167,7 @@ void PlainFFT::Windowing(int *vData, uint16_t samples, uint8_t windowType, uint8
 
 void PlainFFT::Swap(int *x, int *y) 
 {
-	int temp = *x;
+	static int temp = *x;
 	*x = *y;
 	*y = temp;
 }
