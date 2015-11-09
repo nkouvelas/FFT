@@ -145,23 +145,23 @@ void PlainFFT::Windowing(int *vData, uint16_t samples, uint8_t windowType, uint8
 	}
 }
 
-//double PlainFFT::MajorPeak(double *vD, uint16_t samples, double samplingFrequency) 
-//{
-	//double maxY = 0;
-	//uint16_t IndexOfMaxY = 0;
-	//for (uint16_t i = 1; i < ((samples >> 1) - 1); i++) {
-		//if ((vD[i-1] < vD[i]) && (vD[i] > vD[i+1])) {
-			//if (vD[i] > maxY) {
-				//maxY = vD[i];
-				//IndexOfMaxY = i;
-			//}
-		//}
-	//}
-	//double delta = 0.5 * ((vD[IndexOfMaxY-1] - vD[IndexOfMaxY+1]) / (vD[IndexOfMaxY-1] - (2.0 * vD[IndexOfMaxY]) + vD[IndexOfMaxY+1]));
-	//double interpolatedX = ((IndexOfMaxY + delta)  * samplingFrequency) / (samples-1);
+int PlainFFT::MajorPeak(int *vD, uint16_t samples, int samplingFrequency) 
+{
+	double maxY = 0;
+	uint16_t IndexOfMaxY = 0;
+	for (uint16_t i = 1; i < ((samples >> 1) - 1); i++) {
+		if ((vD[i-1] < vD[i]) && (vD[i] > vD[i+1])) {
+			if (vD[i] > maxY) {
+				maxY = vD[i];
+				IndexOfMaxY = i;
+			}
+		}
+	}
+	double delta = 0.5 * ((vD[IndexOfMaxY-1] - vD[IndexOfMaxY+1]) / (vD[IndexOfMaxY-1] - (2.0 * vD[IndexOfMaxY]) + vD[IndexOfMaxY+1]));
+	double interpolatedX = ((IndexOfMaxY + delta)  * samplingFrequency) / (samples-1);
 	/* retuned value: interpolated frequency peak apex */
-	//return(interpolatedX);
-//}
+	return(interpolatedX);
+}
 
 /* Private functions */
 
