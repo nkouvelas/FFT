@@ -38,7 +38,7 @@ uint8_t PlainFFT::Revision(void)
 	return(FFT_LIB_REV);
 }
 
-void PlainFFT::Compute(int *vReal, int *vImag, uint16_t samples, uint8_t dir) 
+void PlainFFT::Compute(long *vReal, long *vImag, uint16_t samples, uint8_t dir) 
 {
 /* Computes in-place complex-to-complex FFT */
 	/* Reverse bits */
@@ -93,7 +93,7 @@ void PlainFFT::Compute(int *vReal, int *vImag, uint16_t samples, uint8_t dir)
 	}
 }
 
-void PlainFFT::ComplexToMagnitude(int *vReal, int *vImag, uint16_t samples) 
+void PlainFFT::ComplexToMagnitude(long *vReal, long *vImag, uint16_t samples) 
 {
 /* vM is half the size of vReal and vImag */
 	for (uint8_t i = 0; i < samples; i++) {
@@ -101,7 +101,7 @@ void PlainFFT::ComplexToMagnitude(int *vReal, int *vImag, uint16_t samples)
 	}
 }
 
-void PlainFFT::Windowing(int *vData, uint16_t samples, uint8_t windowType, uint8_t dir) 
+void PlainFFT::Windowing(long *vData, uint16_t samples, uint8_t windowType, uint8_t dir) 
 {
 /* Weighing factors are computed once before multiple use of FFT */
 /* The weighing function is symetric; half the weighs are recorded */
@@ -165,7 +165,7 @@ int PlainFFT::MajorPeak(int *vD, uint16_t samples, int samplingFrequency)
 
 /* Private functions */
 
-void PlainFFT::Swap(int *x, int *y) 
+void PlainFFT::Swap(long *x, long *y) 
 {
 	double temp = *x;
 	*x = *y;
