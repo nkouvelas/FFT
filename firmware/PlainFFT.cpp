@@ -144,7 +144,7 @@ void PlainFFT::Windowing(int *vData, uint16_t samples, uint8_t windowType, uint8
 		}
 	}
 }
-
+/*
 int PlainFFT::MajorPeak(int *vD, uint16_t samples, int samplingFrequency) 
 {
 	double maxY = 0;
@@ -160,8 +160,8 @@ int PlainFFT::MajorPeak(int *vD, uint16_t samples, int samplingFrequency)
 	double delta = 0.5 * ((vD[IndexOfMaxY-1] - vD[IndexOfMaxY+1]) / (vD[IndexOfMaxY-1] - (2.0 * vD[IndexOfMaxY]) + vD[IndexOfMaxY+1]));
 	double interpolatedX = ((IndexOfMaxY + delta)  * samplingFrequency) / (samples-1);
 	/* retuned value: interpolated frequency peak apex */
-	return(interpolatedX);
-}
+	/*return(interpolatedX);
+}*/
 
 /* Private functions */
 
