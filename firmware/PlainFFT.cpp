@@ -145,7 +145,7 @@ void PlainFFT::Windowing(long *vData, uint16_t samples, uint8_t windowType, uint
 	}
 }
 
-int PlainFFT::MajorPeak(int *vD, uint16_t samples, int samplingFrequency) 
+int PlainFFT::MajorPeak(long *vD, uint16_t samples, int samplingFrequency) 
 {
 	double maxY = 0;
 	uint16_t IndexOfMaxY = 0;
