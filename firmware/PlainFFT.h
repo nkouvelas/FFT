@@ -45,7 +45,7 @@ public:
 	/* Functions */
 	void ComplexToMagnitude(long *vReal, long *vImag, uint16_t samples);
 	void Compute(long *vReal, long *vImag, uint16_t samples, uint8_t dir);
-	int MajorPeak(long vD, int samples, double samplingFrequency);//ithele *
+	//double MajorPeak(double *vD, int samples, double samplingFrequency);//ithele *
 	uint8_t Revision(void);
 	void Windowing(long *vData, uint16_t samples, uint8_t windowType, uint8_t dir); 
 	
