@@ -48,6 +48,7 @@ public:
 	//double MajorPeak(double *vD, int samples, double samplingFrequency);//ithele *
 	uint8_t Revision(void);
 	void Windowing(long *vData, uint16_t samples, uint8_t windowType, uint8_t dir); 
+	void printVector(long *vD, uint8_t n, uint8_t scaleType);
 	
 private:
 	/* Functions */
